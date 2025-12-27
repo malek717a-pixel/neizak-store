@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر نيزك للخدمات الرقمية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #1a73e8, #0d47a1);
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0; padding: 0; color: var(--text-color);
+        }
+
+        header {
+            background: var(--primary-gradient);
+            color: white; padding: 25px; text-align: center;
+            border-bottom-left-radius: 25px; border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .container { padding: 20px; max-width: 600px; margin: auto; }
+
+        .section-title { font-size: 1.2rem; margin: 20px 0 15px; font-weight: bold; color: #555; }
+
+        .services-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;
+        }
+
+        .service-card {
+            background: var(--card-bg); padding: 20px; border-radius: 15px;
+            text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.2s; cursor: pointer;
+        }
+
+        .service-card:active { transform: scale(0.95); }
+        .service-card i { font-size: 2rem; margin-bottom: 10px; display: block; }
+
+        .icon-usdt { color: #26a17b; }
+        .icon-game { color: #ff9800; }
+        .icon-design { color: #e91e63; }
+        .icon-apps { color: #673ab7; }
+        .icon-canva { color: #00c4cc; }
+        .icon-tiktok { color: #fe2c55; }
+        .icon-withdraw { color: #d32f2f; }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;
+        }
+
+        .modal-content {
+            background: white; padding: 25px; border-radius: 20px; width: 85%; max-width: 450px; text-align: right;
+            max-height: 90vh; overflow-y: auto;
+        }
+
+        label { display: block; margin-top: 10px; font-weight: bold; font-size: 0.9rem; }
+
+        input, select {
+            width: 100%; padding: 10px; margin: 5px 0 10px; border: 1px solid #ddd; border-radius: 8px; font-family: 'Cairo'; box-sizing: border-box;
+        }
+
+        .btn-wa {
+            background: #25d366; color: white; border: none; width: 100%; padding: 12px;
+            border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 10px; font-family: 'Cairo';
+        }
+
+        .close-btn { background: #ff5252; color: white; border: none; width: 100%; padding: 8px; border-radius: 10px; margin-top: 5px; cursor: pointer; font-family: 'Cairo'; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>نيزك للدفع والتسويق</h1>
+    <p>بوابتك للخدمات الرقمية المتكاملة</p>
+</header>
+
+<div class="container">
+    <div class="section-title">خدماتنا المميزة</div>
+    <div class="services-grid">
+        <div class="service-card" onclick="openUsdtList()">
+            <i class="fa-solid fa-gem icon-usdt"></i>
+            <span>شحن وسحب USDT</span>
+        </div>
+        <div class="service-card" onclick="alert('جاري الربط...')">
+            <i class="fa-solid fa-gamepad icon-game"></i>
+            <span>شحن ألعاب</span>
+        </div>
+        <div class="service-card" onclick="alert('جاري الربط...')">
+            <i class="fa-solid fa-palette icon-design"></i>
+            <span>تصميم جرافيك</span>
+        </div>
+        <div class="service-card" onclick="openAppsList()">
+            <i class="fa-solid fa-layer-group icon-apps"></i>
+            <span>تطبيقات</span>
+        </div>
+    </div>
+</div>
+
+<div id="usdt-list-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #26a17b;">خيارات USDT</h3>
+        <div class="services-grid" style="margin-top: 20px;">
+            <div class="service-card" onclick="openUsdtForm()">
+                <i class="fa-solid fa-file-invoice-dollar icon-usdt"></i>
+                <span>شحن USDT</span>
+            </div>
+            <div class="service-card" onclick="openWithdrawForm()">
+                <i class="fa-solid fa-hand-holding-dollar icon-withdraw"></i>
+                <span>سحب USDT</span>
+            </div>
+        </div>
+        <button class="close-btn" onclick="closeUsdtList()">إغلاق</button>
+    </div>
+</div>
+
+<div id="usdt-form-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #26a17b;">طلب شحن USDT</h3>
+        <label>الاسم الكامل:</label>
+        <input type="text" id="uName" placeholder="أدخل اسمك">
+        <label>رقم الهاتف:</label>
+        <input type="tel" id="uPhone" placeholder="77xxxxxxx">
+        <label>الكمية (USDT):</label>
+        <input type="number" id="uAmount" placeholder="الكمية المطلوبة">
+        <label>وسيلة الدفع لنا:</label>
+        <select id="uPayment">
+            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
+            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+        </select>
+        <label>رقم العملية / الحوالة:</label>
+        <input type="text" id="uTrans" placeholder="رقم الحوالة">
+        <label>نوع المحفظة المستلمة:</label>
+        <select id="uWallet">
+            <option>Binance</option><option>Trust Wallet</option><option>SafePal</option><option>MEXC</option><option>OKX</option>
+            <option>أخرى (كتابة يدوية)</option>
+        </select>
+        <label>الشبكة:</label>
+        <select id="uNet"><option>TRC20</option><option>BEP20</option><option>ERC20</option></select>
+        <label>عنوان المحفظة:</label>
+        <input type="text" id="uAddr" placeholder="لصق العنوان هنا">
+        <button class="btn-wa" onclick="sendUsdt()">طلب الشحن عبر واتساب</button>
+        <button class="close-btn" onclick="closeUsdtForm()">رجوع</button>
+    </div>
+</div>
+
+<div id="withdraw-form-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #d32f2f;">طلب سحب USDT</h3>
+        <label>الاسم الكامل:</label>
+        <input type="text" id="wName" placeholder="اسمك الكامل">
+        <label>رقم الهاتف:</label>
+        <input type="tel" id="wPhone" placeholder="77xxxxxxx">
+        <label>البنك المستلم عليه (صراف):</label>
+        <select id="wBank">
+            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
+            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+        </select>
+        <label>المحفظة التي سيتم السحب منها:</label>
+        <select id="wWallet">
+            <option>Binance</option><option>Trust Wallet</option><option>SafePal</option><option>MEXC</option><option>OKX</option>
+        </select>
+        <label>الشبكة:</label>
+        <select id="wNet"><option>TRC20</option><option>BEP20</option></select>
+        <label>الكمية المراد سحبها:</label>
+        <input type="number" id="wAmount" placeholder="كم تريد أن تسحب؟">
+        <button class="btn-wa" onclick="sendWithdraw()">طلب السحب عبر واتساب</button>
+        <button class="close-btn" onclick="closeWithdrawForm()">رجوع</button>
+    </div>
+</div>
+
+<div id="apps-list-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #673ab7;">قائمة التطبيقات</h3>
+        <div class="services-grid" style="margin-top: 20px;">
+            <div class="service-card" onclick="openCanvaForm()">
+                <i class="fa-brands fa-canva icon-canva"></i>
+                <span>اشتراك كانفا برو</span>
+            </div>
+            <div class="service-card" onclick="openTikTokForm()">
+                <i class="fa-brands fa-tiktok icon-tiktok"></i>
+                <span>شحن تيك توك</span>
+            </div>
+        </div>
+        <button class="close-btn" onclick="closeAppsList()">إغلاق</button>
+    </div>
+</div>
+
+<div id="tiktok-form-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #fe2c55;">شحن تيك توك</h3>
+        <label>حدد الكمية:</label>
+        <select id="tk-coins" onchange="document.getElementById('manual-box').style.display=(this.value=='manual'?'block':'none')">
+            <option value="100 عملة">100 عملة</option><option value="500 عملة">500 عملة</option>
+            <option value="1000 عملة">1000 عملة</option><option value="manual">إدخال يدوي...</option>
+        </select>
+        <div id="manual-box" style="display:none;"><input type="number" id="tk-manual" placeholder="ادخل العدد"></div>
+        <label>الاسم الكامل:</label>
+        <input type="text" id="tk-name" placeholder="اسمك الكامل">
+        <label>وسيلة الدفع:</label>
+        <select id="tk-pay">
+            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
+            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+        </select>
+        <button class="btn-wa" onclick="sendTikTok()">طلب عبر واتساب</button>
+        <button class="close-btn" onclick="closeTikTokForm()">رجوع</button>
+    </div>
+</div>
+
+<div id="canva-form-modal" class="modal">
+    <div class="modal-content">
+        <h3 style="text-align: center; color: #00c4cc;">اشتراك كانفا برو</h3>
+        <label>الايميل:</label>
+        <input type="email" id="cEmail" placeholder="example@gmail.com">
+        <label>الاسم الكامل:</label>
+        <input type="text" id="cName" placeholder="الاسم الكامل">
+        <label>وسيلة الدفع:</label>
+        <select id="cPay">
+            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
+            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+        </select>
+        <button class="btn-wa" onclick="sendCanva()">إرسال عبر واتساب</button>
+        <button class="close-btn" onclick="closeCanvaForm()">رجوع</button>
+    </div>
+</div>
+
+<script>
+    const wa = "967772740318";
+
+    function openUsdtList() { document.getElementById('usdt-list-modal').style.display='flex'; }
+    function closeUsdtList() { document.getElementById('usdt-list-modal').style.display='none'; }
+    
+    function openUsdtForm() { closeUsdtList(); document.getElementById('usdt-form-modal').style.display='flex'; }
+    function closeUsdtForm() { document.getElementById('usdt-form-modal').style.display='none'; openUsdtList(); }
+
+    function openWithdrawForm() { closeUsdtList(); document.getElementById('withdraw-form-modal').style.display='flex'; }
+    function closeWithdrawForm() { document.getElementById('withdraw-form-modal').style.display='none'; openUsdtList(); }
+
+    function sendUsdt() {
+        const msg = `*طلب شحن USDT*%0Aالاسم: ${document.getElementById('uName').value}%0Aالكمية: ${document.getElementById('uAmount').value}%0Aالدفع: ${document.getElementById('uPayment').value}%0Aرقم العملية: ${document.getElementById('uTrans').value}%0Aالمحفظة: ${document.getElementById('uWallet').value}%0Aالعنوان: ${document.getElementById('uAddr').value}`;
+        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+    }
+
+    function sendWithdraw() {
+        const msg = `*طلب سحب USDT*%0Aالاسم: ${document.getElementById('wName').value}%0Aالهاتف: ${document.getElementById('wPhone').value}%0Aالبنك المستلم: ${document.getElementById('wBank').value}%0Aالمحفظة المسحوب منها: ${document.getElementById('wWallet').value}%0Aالشبكة: ${document.getElementById('wNet').value}%0Aالكمية: ${document.getElementById('wAmount').value}`;
+        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+    }
+
+    function openAppsList() { document.getElementById('apps-list-modal').style.display='flex'; }
+    function closeAppsList() { document.getElementById('apps-list-modal').style.display='none'; }
+    function openCanvaForm() { closeAppsList(); document.getElementById('canva-form-modal').style.display='flex'; }
+    function closeCanvaForm() { document.getElementById('canva-form-modal').style.display='none'; openAppsList(); }
+    function openTikTokForm() { closeAppsList(); document.getElementById('tiktok-form-modal').style.display='flex'; }
+    function closeTikTokForm() { document.getElementById('tiktok-form-modal').style.display='none'; openAppsList(); }
+
+    function sendTikTok() {
+        let q = document.getElementById('tk-coins').value; if(q=='manual') q=document.getElementById('tk-manual').value;
+        const msg = `*شحن تيك توك*%0Aالعدد: ${q}%0Aالاسم: ${document.getElementById('tk-name').value}%0Aالدفع: ${document.getElementById('tk-pay').value}`;
+        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+    }
+
+    function sendCanva() {
+        const msg = `*كانفا برو*%0Aالايميل: ${document.getElementById('cEmail').value}%0Aالاسم: ${document.getElementById('cName').value}%0Aالدفع: ${document.getElementById('cPay').value}`;
+        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
+    }
+
+    window.onclick = function(e) { if(e.target.className=='modal') e.target.style.display='none'; }
+</script>
+</body>
+</html>
