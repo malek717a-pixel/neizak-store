@@ -187,6 +187,11 @@
         <label id="label-target-name">الأسماء المراد كتابتها في التصميم:</label>
         <input type="text" id="dTargetName" placeholder="مثلاً: محمد وأحمد / عائلة الفلان">
         
+        <div id="extra-person-field" style="display:none;">
+            <label id="label-extra-person">الاسم:</label>
+            <input type="text" id="dExtraPerson" placeholder="">
+        </div>
+
         <label>تفاصيل التصميم (الألوان، النص، المناسبة):</label>
         <textarea id="dDetails" rows="3" placeholder="اكتب تفاصيلك هنا..."></textarea>
         
@@ -336,7 +341,6 @@
     const wa = "967772740318";
     let currentDesignType = "";
 
-    // دوال الفتح والاغلاق
     function openUsdtList() { document.getElementById('usdt-list-modal').style.display='flex'; }
     function closeUsdtList() { document.getElementById('usdt-list-modal').style.display='none'; }
     function openUsdtForm() { closeUsdtList(); document.getElementById('usdt-form-modal').style.display='flex'; }
@@ -347,11 +351,42 @@
     function openDesignList() { document.getElementById('design-list-modal').style.display='flex'; }
     function closeDesignList() { document.getElementById('design-list-modal').style.display='none'; }
     
-    // دالة فتح نموذج التصميم الموحد
     function openDesignForm(type) {
         currentDesignType = type;
         closeDesignList();
         document.getElementById('design-form-title').innerText = "طلب " + type;
+        
+        const targetLabel = document.getElementById('label-target-name');
+        const targetInput = document.getElementById('dTargetName');
+        const extraField = document.getElementById('extra-person-field');
+        const extraLabel = document.getElementById('label-extra-person');
+        const extraInput = document.getElementById('dExtraPerson');
+
+        extraField.style.display = 'none';
+
+        if(type === 'تصميم الجمعة') {
+            targetLabel.innerText = "اسم المتجر أو المحل:";
+            targetInput.placeholder = "أدخل اسم المحل المراد وضعه في التصميم";
+        } else if(type === 'تهنئة زفاف') {
+            targetLabel.innerText = "أدخل اسم المحل المراد وضعه في التصميم او اسم المهنىء:";
+            targetInput.placeholder = "مثلاً: عائلة الفلان / محلات النيزك";
+            extraField.style.display = 'block';
+            extraLabel.innerText = "اسم العريس:";
+            extraInput.placeholder = "أدخل اسم العريس";
+        } else if(type === 'تهنئة خطوبة') {
+            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
+            targetInput.placeholder = "مثلاً: تهنئة مقدمه من فلان او محلات فلان";
+            extraField.style.display = 'block';
+            extraLabel.innerText = "اسم الخاطب:";
+            extraInput.placeholder = "أدخل اسم الخاطب";
+        } else if(type === 'تصميم إعلانات') {
+            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
+            targetInput.placeholder = "مثلاً: متجر العماد / شركة عطار/تجارة افاق";
+        } else {
+            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
+            targetInput.placeholder = "مثلاً: محمد وأحمد / عائلة الفلان";
+        }
+        
         document.getElementById('design-form-modal').style.display = 'flex';
     }
     
@@ -367,21 +402,28 @@
     function openTikTokForm() { closeAppsList(); document.getElementById('tiktok-form-modal').style.display='flex'; }
     function closeTikTokForm() { document.getElementById('tiktok-form-modal').style.display='none'; openAppsList(); }
 
-    // دالة إرسال طلب التصميم المحدثة
     function sendDesignOrder() {
         const name = document.getElementById('dName').value;
         const target = document.getElementById('dTargetName').value;
+        const extra = document.getElementById('dExtraPerson').value;
         const details = document.getElementById('dDetails').value;
         const contact = document.getElementById('dContact').value;
         const pay = document.getElementById('dPay').value;
 
         if(!name || !details) { alert("يرجى ملء الاسم والتفاصيل"); return; }
 
-        const msg = `*طلب خدمة تصميم*%0A*النوع:* ${currentDesignType}%0A*العميل:* ${name}%0A*الأسماء في التصميم:* ${target}%0A*التفاصيل:* ${details}%0A*التواصل:* ${contact}%0A*وسيلة الدفع:* ${pay}`;
+        let msg = `*طلب خدمة تصميم*%0A*النوع:* ${currentDesignType}%0A*العميل:* ${name}%0A*الجهة/الأسماء:* ${target}`;
+        
+        if(currentDesignType === 'تهنئة زفاف') {
+            msg += `%0A*اسم العريس:* ${extra}`;
+        } else if(currentDesignType === 'تهنئة خطوبة') {
+            msg += `%0A*اسم الخاطب:* ${extra}`;
+        }
+
+        msg += `%0A*التفاصيل:* ${details}%0A*التواصل:* ${contact}%0A*وسيلة الدفع:* ${pay}`;
         window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
     }
 
-    // دوال الإرسال الأخرى
     function sendUsdt() {
         const msg = `*طلب شحن USDT*%0Aالاسم: ${document.getElementById('uName').value}%0Aالكمية: ${document.getElementById('uAmount').value}%0Aالدفع: ${document.getElementById('uPayment').value}%0Aرقم العملية: ${document.getElementById('uTrans').value}%0Aالمحفظة: ${document.getElementById('uWallet').value}%0Aالعنوان: ${document.getElementById('uAddr').value}`;
         window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
