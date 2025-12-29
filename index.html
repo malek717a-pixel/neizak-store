@@ -3,449 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متجر نيزك للخدمات الرقمية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/dist/css/all.min.css">
+    <title>نيزك لخدمات الدفع والتصميم</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #1a73e8, #0d47a1);
-            --bg-color: #f0f2f5;
-            --card-bg: #ffffff;
-            --text-color: #333;
-            --accent-color: #1a73e8;
+            --main-cyan: #00d2ff;
+            --withdraw-orange: #ff9100;
+            --tiktok-pink: #fe2c55;
+            --canva-purple: #7d2ae8;
+            --design-blue: #3b82f6;
+            --friday-gold: #b59410;
+            --dark-blue: #1a202c;
+            --body-text: #4a5568;
+            --whatsapp-green: #25D366;
         }
+
+        * { box-sizing: border-box; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Cairo', sans-serif;
-            background-color: var(--bg-color);
-            margin: 0; padding: 0; color: var(--text-color);
-            transition: all 0.3s ease;
+            background-color: #f0f9ff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px 15px;
         }
 
-        header {
-            background: var(--primary-gradient);
-            color: white; padding: 35px 25px; text-align: center;
-            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
-            box-shadow: 0 10px 20px rgba(13, 71, 161, 0.2);
-            animation: fadeInDown 0.8s ease;
+        .site-container {
+            width: 100%;
+            max-width: 1000px;
+            background: #ffffff;
+            border: 3px solid var(--main-cyan);
+            border-radius: 25px;
+            padding: 40px 20px;
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
-        header h1 { margin: 0; font-size: 1.8rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-        header p { opacity: 0.9; margin-top: 5px; font-size: 0.9rem; }
-
-        .container { padding: 20px; max-width: 600px; margin: auto; }
-
-        .section-title { 
-            font-size: 1.1rem; margin: 25px 0 15px; font-weight: bold; color: #444;
-            display: flex; align-items: center; gap: 10px;
-        }
-        .section-title::after { content: ""; flex: 1; height: 2px; background: #ddd; border-radius: 2px; }
+        .logo { font-size: 3rem; font-weight: 900; color: var(--dark-blue); margin-bottom: 10px; }
+        .tagline { color: var(--body-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 40px; }
 
         .services-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px;
-            animation: fadeInUp 0.8s ease;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .service-card {
-            background: var(--card-bg); padding: 25px 15px; border-radius: 20px;
-            text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            cursor: pointer; border: 1px solid rgba(0,0,0,0.02);
+        .card {
+            background: #fff;
+            border: 2px solid #edf2f7;
+            border-radius: 20px;
+            padding: 30px;
+            transition: 0.3s;
+            cursor: pointer;
         }
 
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
-            border-color: var(--accent-color);
+        .card:hover { border-color: var(--main-cyan); transform: translateY(-5px); }
+
+        .icon-box {
+            width: 70px; height: 70px; background: var(--main-cyan);
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 15px; color: white; font-size: 1.8rem;
         }
-
-        .service-card:active { transform: scale(0.92); }
-        .service-card i { font-size: 2.2rem; margin-bottom: 12px; display: block; transition: transform 0.3s ease; }
-        .service-card:hover i { transform: scale(1.1); }
-
-        .icon-usdt { color: #26a17b; }
-        .icon-game { color: #ff9800; }
-        .icon-design { color: #e91e63; }
-        .icon-apps { color: #673ab7; }
-        .icon-canva { color: #00c4cc; }
-        .icon-tiktok { color: #fe2c55; }
-        .icon-withdraw { color: #d32f2f; }
-        .icon-friday { color: #4caf50; }
-        .icon-wedding { color: #9c27b0; }
-        .icon-ring { color: #ff5722; }
-        .icon-ads { color: #3f51b5; }
 
         .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
-            justify-content: center; align-items: center; z-index: 1000;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            backdrop-filter: blur(8px);
+            padding: 10px;
         }
 
         .modal-content {
-            background: white; padding: 25px; border-radius: 25px; width: 88%; max-width: 450px; text-align: right;
-            max-height: 85vh; overflow-y: auto; position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            border-radius: 30px;
+            padding: 30px;
+            overflow-y: auto;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
         }
 
-        label { display: block; margin-top: 12px; font-weight: bold; font-size: 0.85rem; color: #555; }
+        @keyframes slideIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
+        .sub-services {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .sub-card {
+            border: 2px solid #edf2f7;
+            padding: 20px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: center;
+        }
+        .sub-card:hover { transform: translateY(-3px); background: #f8fafc; border-color: var(--main-cyan); }
+        .sub-card i { font-size: 1.8rem; margin-bottom: 8px; display: block; }
+        .sub-card h3 { font-size: 0.9rem; color: var(--dark-blue); }
+
+        .form-group { margin-bottom: 15px; text-align: right; }
+        label { display: block; font-weight: 800; margin-bottom: 5px; color: var(--dark-blue); font-size: 0.95rem; }
         input, select, textarea {
-            width: 100%; padding: 12px; margin: 6px 0 12px; border: 2px solid #eee; border-radius: 12px; 
-            font-family: 'Cairo'; box-sizing: border-box; transition: 0.3s; background: #fdfdfd;
+            width: 100%; padding: 12px; border: 2px solid #edf2f7;
+            border-radius: 12px; font-size: 1rem; font-family: 'Cairo'; outline: none;
         }
 
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--accent-color); outline: none; background: #fff; box-shadow: 0 0 8px rgba(26, 115, 232, 0.1);
+        .btn-whatsapp-submit {
+            width: 100%; padding: 15px; background: var(--whatsapp-green);
+            color: white; border: none; border-radius: 15px;
+            font-weight: 800; font-size: 1.1rem; cursor: pointer;
+            margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
 
-        .btn-wa {
-            background: #25d366; color: white; border: none; width: 100%; padding: 14px;
-            border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 15px; 
-            font-family: 'Cairo'; font-size: 1rem; transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+        .btn-close {
+            margin-top: 20px; padding: 10px 25px;
+            background: #f1f5f9; color: #333;
+            border: none; border-radius: 50px; font-weight: 700; cursor: pointer;
+            width: 100%;
         }
 
-        .btn-wa:hover { background: #1ebe57; transform: scale(1.02); }
-
-        .close-btn { 
-            background: #f1f1f1; color: #666; border: none; width: 100%; padding: 10px; 
-            border-radius: 12px; margin-top: 8px; cursor: pointer; font-family: 'Cairo'; font-weight: bold;
-        }
-        .close-btn:hover { background: #ffebee; color: #ff5252; }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-
-        .modal-content::-webkit-scrollbar { width: 5px; }
-        .modal-content::-webkit-scrollbar-thumb { background: #ddd; border-radius: 10px; }
+        .admin-info { background: #f7fafc; padding: 15px; border-radius: 15px; margin: 15px 0; border-right: 5px solid var(--main-cyan); text-align: center; }
+        .social-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 15px; }
+        .social-item { text-decoration: none; color: white; padding: 8px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; }
+        
+        .youtube { background: #FF0000; } .telegram { background: #0088cc; } .facebook { background: #1877F2; } .instagram { background: #E1306C; } .whatsapp { background: var(--whatsapp-green); grid-column: 1/-1; }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>نيزك للدفع والتسويق</h1>
-    <p>بوابتك للخدمات الرقمية المتكاملة</p>
-</header>
+    <div class="site-container">
+        <h1 class="logo">نــيــزك</h1>
+        <p class="tagline">نــيـــزك لخدمات الإنترنت والتسويق <br> نقدم حلول مثالية لأعمالك عبر الإنترنت</p>
 
-<div class="container">
-    <div class="section-title">خدماتنا المميزة</div>
-    <div class="services-grid">
-        <div class="service-card" onclick="openUsdtList()">
-            <i class="fa-solid fa-gem icon-usdt"></i>
-            <span>شحن وسحب USDT</span>
-        </div>
-        <div class="service-card" onclick="alert('جاري الربط...')">
-            <i class="fa-solid fa-gamepad icon-game"></i>
-            <span>شحن ألعاب</span>
-        </div>
-        <div class="service-card" onclick="openDesignList()">
-            <i class="fa-solid fa-palette icon-design"></i>
-            <span>تصميم جرافيك</span>
-        </div>
-        <div class="service-card" onclick="openAppsList()">
-            <i class="fa-solid fa-layer-group icon-apps"></i>
-            <span>تطبيقات</span>
-        </div>
-    </div>
-</div>
-
-<div id="design-list-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #e91e63;"><i class="fa-solid fa-palette"></i> خدمات التصميم</h3>
-        <div class="services-grid" style="margin-top: 20px;">
-            <div class="service-card" onclick="openDesignForm('تصميم الجمعة')">
-                <i class="fa-solid fa-mosque icon-friday"></i>
-                <span>تصميم الجمعة</span>
+        <div class="services-grid">
+            <div class="card" onclick="openModal('mainUsdtModal')">
+                <div class="icon-box"><i class="fa-solid fa-money-bill-transfer"></i></div>
+                <h3>شحن وسحب USDT</h3>
+                <p>خيارات الشحن والسحب الرقمي</p>
             </div>
-            <div class="service-card" onclick="openDesignForm('تهنئة زفاف')">
-                <i class="fa-solid fa-heart icon-wedding"></i>
-                <span>تهنئة زفاف</span>
+            <div class="card" onclick="openModal('mainAppsModal')">
+                <div class="icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
+                <h3>تطبيقات</h3>
+                <p>شحن عملات واشتراكات بريميوم</p>
             </div>
-            <div class="service-card" onclick="openDesignForm('تهنئة خطوبة')">
-                <i class="fa-solid fa-ring icon-ring"></i>
-                <span>تهنئة خطوبة</span>
-            </div>
-            <div class="service-card" onclick="openDesignForm('تصميم إعلانات')">
-                <i class="fa-solid fa-rectangle-ad icon-ads"></i>
-                <span>تصميم إعلانات</span>
+            <div class="card" onclick="openModal('mainDesignModal')">
+                <div class="icon-box"><i class="fa-solid fa-pen-nib"></i></div>
+                <h3>تصميم جرافيك</h3>
+                <p>هوية بصرية واحترافية.</p>
             </div>
         </div>
-        <button class="close-btn" onclick="closeDesignList()">إغلاق</button>
-    </div>
-</div>
 
-<div id="design-form-modal" class="modal">
-    <div class="modal-content">
-        <h3 id="design-form-title" style="text-align: center; color: #e91e63;">طلب تصميم</h3>
-        
-        <label>الاسم الكامل (صاحب الطلب):</label>
-        <input type="text" id="dName" placeholder="أدخل اسمك">
-        
-        <label id="label-target-name">الأسماء المراد كتابتها في التصميم:</label>
-        <input type="text" id="dTargetName" placeholder="مثلاً: محمد وأحمد / عائلة الفلان">
-        
-        <div id="extra-person-field" style="display:none;">
-            <label id="label-extra-person">الاسم:</label>
-            <input type="text" id="dExtraPerson" placeholder="">
+        <button style="margin-top:40px; cursor:pointer; padding:10px 25px; border:2px solid var(--main-cyan); border-radius:50px; background:none; font-weight:700;" onclick="openModal('aboutModal')">
+            <i class="fa-solid fa-info-circle"></i> حول الموقع
+        </button>
+    </div>
+
+    <div id="mainUsdtModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خيارات USDT</h2>
+            <div class="sub-services">
+                <div class="sub-card" style="border-bottom: 5px solid var(--main-cyan);" onclick="closeModal('mainUsdtModal'); openModal('formChargeModal')">
+                    <i class="fa-solid fa-circle-arrow-up" style="color: var(--main-cyan);"></i>
+                    <h3>شحن USDT</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid var(--withdraw-orange);" onclick="closeModal('mainUsdtModal'); openModal('formWithdrawModal')">
+                    <i class="fa-solid fa-circle-arrow-down" style="color: var(--withdraw-orange);"></i>
+                    <h3>سحب USDT</h3>
+                </div>
+            </div>
+            <button class="btn-close" onclick="closeModal('mainUsdtModal')">إغلاق</button>
         </div>
-
-        <label>تفاصيل التصميم (الألوان، النص، المناسبة):</label>
-        <textarea id="dDetails" rows="3" placeholder="اكتب تفاصيلك هنا..."></textarea>
-        
-        <label>الأرقام أو العناوين (اختياري):</label>
-        <input type="text" id="dContact" placeholder="رقم هاتف، موقع، إلخ">
-
-        <label>وسيلة الدفع:</label>
-        <select id="dPay">
-            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
-            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
-        </select>
-        
-        <button class="btn-wa" onclick="sendDesignOrder()"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر واتساب</button>
-        <button class="close-btn" onclick="closeDesignForm()">رجوع</button>
     </div>
-</div>
 
-<div id="usdt-list-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #26a17b;"><i class="fa-solid fa-wallet"></i> خيارات USDT</h3>
-        <div class="services-grid" style="margin-top: 20px;">
-            <div class="service-card" onclick="openUsdtForm()">
-                <i class="fa-solid fa-file-invoice-dollar icon-usdt"></i>
-                <span>شحن USDT</span>
+    <div id="formChargeModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: var(--main-cyan); margin-bottom: 20px; text-align: center;">طلب شحن USDT</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="nameC" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>رقم الهاتف:</label><input type="number" id="phoneC" placeholder="77xxxxxxx"></div>
+            <div class="form-group"><label>الكمية (USDT):</label><input type="number" id="amountC" placeholder="الكمية المطلوبة"></div>
+            <div class="form-group">
+                <label>وسيلة الدفع لنا:</label>
+                <select id="payC">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
             </div>
-            <div class="service-card" onclick="openWithdrawForm()">
-                <i class="fa-solid fa-hand-holding-dollar icon-withdraw"></i>
-                <span>سحب USDT</span>
-            </div>
+            <div class="form-group"><label>رقم العملية / الحوالة:</label><input type="text" id="txnC" placeholder="رقم الحوالة"></div>
+            <div class="form-group"><label>نوع المحفظة المستلمة:</label><select id="walletC"><option>Binance</option><option>OKX</option><option>MEXC</option><option>SafePal</option><option>Trust Wallet</option><option>أخرى</option></select></div>
+            <div class="form-group"><label>الشبكة:</label><select id="netC"><option>TRC20</option><option>ERC20</option><option>BEP20</option><option>Polygon</option></select></div>
+            <div class="form-group"><label>عنوان المحفظة:</label><textarea id="addrC" rows="2" placeholder="لصق العنوان هنا"></textarea></div>
+            <button class="btn-whatsapp-submit" onclick="sendToWA('شحن')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeModal('formChargeModal'); openModal('mainUsdtModal')">رجوع</button>
         </div>
-        <button class="close-btn" onclick="closeUsdtList()">إغلاق</button>
     </div>
-</div>
 
-<div id="usdt-form-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #26a17b;">طلب شحن USDT</h3>
-        <label>الاسم الكامل:</label>
-        <input type="text" id="uName" placeholder="أدخل اسمك">
-        <label>رقم الهاتف:</label>
-        <input type="tel" id="uPhone" placeholder="77xxxxxxx">
-        <label>الكمية (USDT):</label>
-        <input type="number" id="uAmount" placeholder="الكمية المطلوبة">
-        <label>وسيلة الدفع لنا:</label>
-        <select id="uPayment">
-            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
-            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
-        </select>
-        <label>رقم العملية / الحوالة:</label>
-        <input type="text" id="uTrans" placeholder="رقم الحوالة">
-        <label>نوع المحفظة المستلمة:</label>
-        <select id="uWallet">
-            <option>Binance</option><option>Trust Wallet</option><option>SafePal</option><option>MEXC</option><option>OKX</option>
-            <option>أخرى (كتابة يدوية)</option>
-        </select>
-        <label>الشبكة:</label>
-        <select id="uNet"><option>TRC20</option><option>BEP20</option><option>ERC20</option></select>
-        <label>عنوان المحفظة:</label>
-        <input type="text" id="uAddr" placeholder="لصق العنوان هنا">
-        <button class="btn-wa" onclick="sendUsdt()">طلب الشحن عبر واتساب</button>
-        <button class="close-btn" onclick="closeUsdtForm()">رجوع</button>
-    </div>
-</div>
-
-<div id="withdraw-form-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #d32f2f;">طلب سحب USDT</h3>
-        <label>الاسم الكامل:</label>
-        <input type="text" id="wName" placeholder="اسمك الكامل">
-        <label>رقم الهاتف:</label>
-        <input type="tel" id="wPhone" placeholder="77xxxxxxx">
-        <label>البنك المستلم عليه (صراف):</label>
-        <select id="wBank">
-            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
-            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
-        </select>
-        <label>المحفظة التي سيتم السحب منها:</label>
-        <select id="wWallet">
-            <option>Binance</option><option>Trust Wallet</option><option>SafePal</option><option>MEXC</option><option>OKX</option>
-            <option>أخرى (كتابة يدوية)</option>
-        </select>
-        <label>الشبكة:</label>
-        <select id="wNet"><option>TRC20</option><option>BEP20</option><option>ERC20</option></select>
-        <label>الكمية المراد سحبها:</label>
-        <input type="number" id="wAmount" placeholder="كم تريد أن تسحب؟">
-        <button class="btn-wa" onclick="sendWithdraw()">طلب السحب عبر واتساب</button>
-        <button class="close-btn" onclick="closeWithdrawForm()">رجوع</button>
-    </div>
-</div>
-
-<div id="apps-list-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #673ab7;">قائمة التطبيقات</h3>
-        <div class="services-grid" style="margin-top: 20px;">
-            <div class="service-card" onclick="openCanvaForm()">
-                <i class="fa-brands fa-canva icon-canva"></i>
-                <span>اشتراك كانفا برو</span>
+    <div id="formWithdrawModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: var(--withdraw-orange); margin-bottom: 20px; text-align: center;">طلب سحب USDT</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="nameW" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>رقم الهاتف:</label><input type="number" id="phoneW" placeholder="77xxxxxxx"></div>
+            <div class="form-group"><label>الكمية (USDT):</label><input type="number" id="amountW" placeholder="الكمية المطلوب سحبها"></div>
+            <div class="form-group">
+                <label>وسيلة استلام الاموال:</label>
+                <select id="receiveW">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
             </div>
-            <div class="service-card" onclick="openTikTokForm()">
-                <i class="fa-brands fa-tiktok icon-tiktok"></i>
-                <span>شحن تيك توك</span>
-            </div>
+            <div class="form-group"><label>رقم الحساب / او المحفظه / البنك:</label><input type="text" id="accW" placeholder="رقم حسابك ضعه هنا"></div>
+            <div class="form-group"><label>نوع المحفظة التي ستسحب منها:</label><select id="walletW"><option>Binance</option><option>OKX</option><option>MEXC</option><option>SafePal</option><option>Trust Wallet</option><option>أخرى</option></select></div>
+            <div class="form-group"><label>الشبكة:</label><select id="netW"><option>TRC20</option><option>ERC20</option><option>BEP20</option><option>Polygon</option></select></div>
+            <button class="btn-whatsapp-submit" style="background: var(--withdraw-orange);" onclick="sendToWA('سحب')"><i class="fab fa-whatsapp"></i> طلب سحب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeModal('formWithdrawModal'); openModal('mainUsdtModal')">رجوع</button>
         </div>
-        <button class="close-btn" onclick="closeAppsList()">إغلاق</button>
     </div>
-</div>
 
-<div id="tiktok-form-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #fe2c55;">شحن تيك توك</h3>
-        <label>حدد الكمية:</label>
-        <select id="tk-coins" onchange="document.getElementById('manual-box').style.display=(this.value=='manual'?'block':'none')">
-            <option value="100 عملة">100 عملة</option><option value="500 عملة">500 عملة</option>
-            <option value="1000 عملة">1000 عملة</option><option value="manual">إدخال يدوي...</option>
-        </select>
-        <div id="manual-box" style="display:none;"><input type="number" id="tk-manual" placeholder="ادخل العدد"></div>
-        <label>الاسم الكامل:</label>
-        <input type="text" id="tk-name" placeholder="اسمك الكامل">
-        <label>وسيلة الدفع:</label>
-        <select id="tk-pay">
-            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
-            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
-        </select>
-        <button class="btn-wa" onclick="sendTikTok()">طلب عبر واتساب</button>
-        <button class="close-btn" onclick="closeTikTokForm()">رجوع</button>
+    <div id="mainAppsModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خدمات التطبيقات</h2>
+            <div class="sub-services">
+                <div class="sub-card" style="border-bottom: 5px solid var(--tiktok-pink);" onclick="closeModal('mainAppsModal'); openModal('formTiktokModal')">
+                    <i class="fa-brands fa-tiktok" style="color: var(--tiktok-pink);"></i>
+                    <h3>شحن تيك توك</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid var(--canva-purple);" onclick="closeModal('mainAppsModal'); openModal('formCanvaModal')">
+                    <i class="fa-solid fa-palette" style="color: var(--canva-purple);"></i>
+                    <h3>كانفا برو</h3>
+                </div>
+            </div>
+            <button class="btn-close" onclick="closeModal('mainAppsModal')">إغلاق</button>
+        </div>
     </div>
-</div>
 
-<div id="canva-form-modal" class="modal">
-    <div class="modal-content">
-        <h3 style="text-align: center; color: #00c4cc;">اشتراك كانفا برو</h3>
-        <label>الايميل:</label>
-        <input type="email" id="cEmail" placeholder="example@gmail.com">
-        <label>الاسم الكامل:</label>
-        <input type="text" id="cName" placeholder="الاسم الكامل">
-        <label>وسيلة الدفع:</label>
-        <select id="cPay">
-            <option>كريمي $</option><option>كريمي سعودي</option><option>كريمي ريال يمني</option>
-            <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
-        </select>
-        <button class="btn-wa" onclick="sendCanva()">إرسال عبر واتساب</button>
-        <button class="close-btn" onclick="closeCanvaForm()">رجوع</button>
+    <div id="formTiktokModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: var(--tiktok-pink); margin-bottom: 20px; text-align: center;">شحن عملات TikTok</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="tkName" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>يوزر الحساب (ID):</label><input type="text" id="tkId" placeholder="@username"></div>
+            <div class="form-group"><label>كمية العملات:</label><input type="number" id="tkCoins" placeholder="مثلاً: 1000 عملة"></div>
+            <div class="form-group">
+                <label>وسيلة الدفع:</label>
+                <select id="tkPay">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
+            </div>
+            <button class="btn-whatsapp-submit" style="background: var(--tiktok-pink);" onclick="sendToWA('تيك توك')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeModal('formTiktokModal'); openModal('mainAppsModal')">رجوع</button>
+        </div>
     </div>
-</div>
 
-<script>
-    const wa = "967772740318";
-    let currentDesignType = "";
+    <div id="formCanvaModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: var(--canva-purple); margin-bottom: 20px; text-align: center;">اشتراك Canva Pro</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="cvName" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>الإيميل المراد تفعيله:</label><input type="email" id="cvEmail" placeholder="example@gmail.com"></div>
+            <div class="form-group">
+                <label>مدة الاشتراك:</label>
+                <select id="cvPlan">
+                    <option>شهر واحد</option><option>6 أشهر</option><option>سنة كاملة</option>
+                    <option selected>3 سنين (الخيار الأنسب)</option>
+                </select>
+            </div>
+            <button class="btn-whatsapp-submit" style="background: var(--canva-purple);" onclick="sendToWA('كانفا')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeModal('formCanvaModal'); openModal('mainAppsModal')">رجوع</button>
+        </div>
+    </div>
 
-    function openUsdtList() { document.getElementById('usdt-list-modal').style.display='flex'; }
-    function closeUsdtList() { document.getElementById('usdt-list-modal').style.display='none'; }
-    function openUsdtForm() { closeUsdtList(); document.getElementById('usdt-form-modal').style.display='flex'; }
-    function closeUsdtForm() { document.getElementById('usdt-form-modal').style.display='none'; openUsdtList(); }
-    function openWithdrawForm() { closeUsdtList(); document.getElementById('withdraw-form-modal').style.display='flex'; }
-    function closeWithdrawForm() { document.getElementById('withdraw-form-modal').style.display='none'; openUsdtList(); }
-    
-    function openDesignList() { document.getElementById('design-list-modal').style.display='flex'; }
-    function closeDesignList() { document.getElementById('design-list-modal').style.display='none'; }
-    
-    function openDesignForm(type) {
-        currentDesignType = type;
-        closeDesignList();
-        document.getElementById('design-form-title').innerText = "طلب " + type;
+    <div id="mainDesignModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خدمات التصميم الاحترافي</h2>
+            <div class="sub-services">
+                <div class="sub-card" style="border-bottom: 5px solid var(--friday-gold);" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم جمعة مباركة')">
+                    <i class="fa-solid fa-mosque" style="color: var(--friday-gold);"></i>
+                    <h3>تصاميم الجمعة</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid #10b981;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم شعار / لوجو')">
+                    <i class="fa-solid fa-stamp" style="color: #10b981;"></i>
+                    <h3>شعارات (Logos)</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid #ef4444;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم بوستر إعلاني')">
+                    <i class="fa-solid fa-image" style="color: #ef4444;"></i>
+                    <h3>بوسترات إعلانية</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid var(--design-blue);" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم هوية بصرية')">
+                    <i class="fa-solid fa-briefcase" style="color: var(--design-blue);"></i>
+                    <h3>هوية بصرية</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid #8b5cf6;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم بطاقة عمل / بزنس كارد')">
+                    <i class="fa-solid fa-address-card" style="color: #8b5cf6;"></i>
+                    <h3>بزنس كارد</h3>
+                </div>
+                <div class="sub-card" style="border-bottom: 5px solid #f59e0b;" onclick="closeModal('mainDesignModal'); openDesignForm('طلب تصميم خاص')">
+                    <i class="fa-solid fa-plus-circle" style="color: #f59e0b;"></i>
+                    <h3>طلبات أخرى</h3>
+                </div>
+            </div>
+            <button class="btn-close" onclick="closeModal('mainDesignModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="formDesignModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 id="designFormTitle" style="color: var(--design-blue); margin-bottom: 20px; text-align: center;">طلب تصميم</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="dsName" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>نوع الخدمة:</label><input type="text" id="dsType" readonly style="background: #f1f5f9;"></div>
+            <div class="form-group"><label>ملاحظات (ألوان، نصوص، تفاصيل):</label><textarea id="dsDesc" rows="3" placeholder="اكتب ما تريده في التصميم..."></textarea></div>
+            <button class="btn-whatsapp-submit" style="background: var(--design-blue);" onclick="sendToWA('تصميم')"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeModal('formDesignModal'); openModal('mainDesignModal')">رجوع</button>
+        </div>
+    </div>
+
+    <div id="aboutModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--main-cyan); margin-bottom: 10px;">متجر نيزك للدفع</h2>
+            <p style="font-weight: 700; color: #4a5568;">نقدم حلولاً مثالية لأعمالك عبر الإنترنت</p>
+            <div class="admin-info"><p style="font-weight: 800;">الادارة: م/ مالك علي يوسف</p></div>
+            <div class="social-links">
+                <a href="https://youtube.com/@nezk2d" target="_blank" class="social-item youtube"><i class="fab fa-youtube"></i> يوتيوب</a>
+                <a href="https://t.me/nezk2d" target="_blank" class="social-item telegram"><i class="fab fa-telegram"></i> تلجرام</a>
+                <a href="https://www.facebook.com/share/1C5ibgdfFg/" target="_blank" class="social-item facebook"><i class="fab fa-facebook"></i> فيسبوك</a>
+                <a href="https://www.instagram.com/nezk2d" target="_blank" class="social-item instagram"><i class="fab fa-instagram"></i> انستقرام</a>
+                <a href="https://wa.me/967772740318" target="_blank" class="social-item whatsapp"><i class="fab fa-whatsapp"></i> تواصل واتساب</a>
+            </div>
+            <button class="btn-close" onclick="closeModal('aboutModal')">رجوع للقائمة</button>
+        </div>
+    </div>
+
+    <script>
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
         
-        const targetLabel = document.getElementById('label-target-name');
-        const targetInput = document.getElementById('dTargetName');
-        const extraField = document.getElementById('extra-person-field');
-        const extraLabel = document.getElementById('label-extra-person');
-        const extraInput = document.getElementById('dExtraPerson');
-
-        extraField.style.display = 'none';
-
-        if(type === 'تصميم الجمعة') {
-            targetLabel.innerText = "اسم المتجر أو المحل:";
-            targetInput.placeholder = "أدخل اسم المحل المراد وضعه في التصميم";
-        } else if(type === 'تهنئة زفاف') {
-            targetLabel.innerText = "أدخل اسم المحل المراد وضعه في التصميم او اسم المهنىء:";
-            targetInput.placeholder = "مثلاً: عائلة الفلان / محلات النيزك";
-            extraField.style.display = 'block';
-            extraLabel.innerText = "اسم العريس:";
-            extraInput.placeholder = "أدخل اسم العريس";
-        } else if(type === 'تهنئة خطوبة') {
-            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
-            targetInput.placeholder = "مثلاً: تهنئة مقدمه من فلان او محلات فلان";
-            extraField.style.display = 'block';
-            extraLabel.innerText = "اسم الخاطب:";
-            extraInput.placeholder = "أدخل اسم الخاطب";
-        } else if(type === 'تصميم إعلانات') {
-            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
-            targetInput.placeholder = "مثلاً: متجر العماد / شركة عطار/تجارة افاق";
-        } else {
-            targetLabel.innerText = "الأسماء المراد كتابتها في التصميم:";
-            targetInput.placeholder = "مثلاً: محمد وأحمد / عائلة الفلان";
-        }
-        
-        document.getElementById('design-form-modal').style.display = 'flex';
-    }
-    
-    function closeDesignForm() {
-        document.getElementById('design-form-modal').style.display = 'none';
-        openDesignList();
-    }
-
-    function openAppsList() { document.getElementById('apps-list-modal').style.display='flex'; }
-    function closeAppsList() { document.getElementById('apps-list-modal').style.display='none'; }
-    function openCanvaForm() { closeAppsList(); document.getElementById('canva-form-modal').style.display='flex'; }
-    function closeCanvaForm() { document.getElementById('canva-form-modal').style.display='none'; openAppsList(); }
-    function openTikTokForm() { closeAppsList(); document.getElementById('tiktok-form-modal').style.display='flex'; }
-    function closeTikTokForm() { document.getElementById('tiktok-form-modal').style.display='none'; openAppsList(); }
-
-    function sendDesignOrder() {
-        const name = document.getElementById('dName').value;
-        const target = document.getElementById('dTargetName').value;
-        const extra = document.getElementById('dExtraPerson').value;
-        const details = document.getElementById('dDetails').value;
-        const contact = document.getElementById('dContact').value;
-        const pay = document.getElementById('dPay').value;
-
-        if(!name || !details) { alert("يرجى ملء الاسم والتفاصيل"); return; }
-
-        let msg = `*طلب خدمة تصميم*%0A*النوع:* ${currentDesignType}%0A*العميل:* ${name}%0A*الجهة/الأسماء:* ${target}`;
-        
-        if(currentDesignType === 'تهنئة زفاف') {
-            msg += `%0A*اسم العريس:* ${extra}`;
-        } else if(currentDesignType === 'تهنئة خطوبة') {
-            msg += `%0A*اسم الخاطب:* ${extra}`;
+        function openDesignForm(type) {
+            document.getElementById('dsType').value = type;
+            document.getElementById('designFormTitle').innerText = "طلب " + type;
+            openModal('formDesignModal');
         }
 
-        msg += `%0A*التفاصيل:* ${details}%0A*التواصل:* ${contact}%0A*وسيلة الدفع:* ${pay}`;
-        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-    }
+        function sendToWA(type) {
+            let msg = "";
+            const waNumber = "967772740318";
+            
+            if(type === 'شحن') {
+                msg = `*طلب شحن USDT*%0A*الاسم:* ${document.getElementById('nameC').value}%0A*الكمية:* ${document.getElementById('amountC').value}%0A*الدفع:* ${document.getElementById('payC').value}%0A*العنوان:* ${document.getElementById('addrC').value}`;
+            } else if(type === 'سحب') {
+                msg = `*طلب سحب USDT*%0A*الاسم:* ${document.getElementById('nameW').value}%0A*الكمية:* ${document.getElementById('amountW').value}%0A*الاستلام:* ${document.getElementById('receiveW').value}`;
+            } else if(type === 'تيك توك') {
+                msg = `*طلب شحن تيك توك*%0A*ID:* ${document.getElementById('tkId').value}%0A*العملات:* ${document.getElementById('tkCoins').value}`;
+            } else if(type === 'كانفا') {
+                msg = `*طلب كانفا برو*%0A*الإيميل:* ${document.getElementById('cvEmail').value}%0A*المدة:* ${document.getElementById('cvPlan').value}`;
+            } else if(type === 'تصميم') {
+                msg = `*طلب تصميم نيزك*%0A*الاسم:* ${document.getElementById('dsName').value}%0A*الخدمة:* ${document.getElementById('dsType').value}%0A*التفاصيل:* ${document.getElementById('dsDesc').value}`;
+            }
+            window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
+        }
 
-    function sendUsdt() {
-        const msg = `*طلب شحن USDT*%0Aالاسم: ${document.getElementById('uName').value}%0Aالكمية: ${document.getElementById('uAmount').value}%0Aالدفع: ${document.getElementById('uPayment').value}%0Aرقم العملية: ${document.getElementById('uTrans').value}%0Aالمحفظة: ${document.getElementById('uWallet').value}%0Aالعنوان: ${document.getElementById('uAddr').value}`;
-        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-    }
-
-    function sendWithdraw() {
-        const msg = `*طلب سحب USDT*%0Aالاسم: ${document.getElementById('wName').value}%0Aالهاتف: ${document.getElementById('wPhone').value}%0Aالبنك المستلم: ${document.getElementById('wBank').value}%0Aالمحفظة المسحوب منها: ${document.getElementById('wWallet').value}%0Aالشبكة: ${document.getElementById('wNet').value}%0Aالكمية: ${document.getElementById('wAmount').value}`;
-        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-    }
-
-    function sendTikTok() {
-        let q = document.getElementById('tk-coins').value; if(q=='manual') q=document.getElementById('tk-manual').value;
-        const msg = `*شحن تيك توك*%0Aالعدد: ${q}%0Aالاسم: ${document.getElementById('tk-name').value}%0Aالدفع: ${document.getElementById('tk-pay').value}`;
-        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-    }
-
-    function sendCanva() {
-        const msg = `*كانفا برو*%0Aالايميل: ${document.getElementById('cEmail').value}%0Aالاسم: ${document.getElementById('cName').value}%0Aالدفع: ${document.getElementById('cPay').value}`;
-        window.open(`https://wa.me/${wa}?text=${msg}`, '_blank');
-    }
-
-    window.onclick = function(e) { if(e.target.className=='modal') e.target.style.display='none'; }
-</script>
+        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
+    </script>
 </body>
 </html>
