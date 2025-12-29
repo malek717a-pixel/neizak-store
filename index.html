@@ -277,6 +277,13 @@
                     <option selected>3 سنين (الخيار الأنسب)</option>
                 </select>
             </div>
+            <div class="form-group">
+                <label>وسيلة الدفع:</label>
+                <select id="cvPay">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
+            </div>
             <button class="btn-whatsapp-submit" style="background: var(--canva-purple);" onclick="sendToWA('كانفا')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
             <button class="btn-close" onclick="closeModal('formCanvaModal'); openModal('mainAppsModal')">رجوع</button>
         </div>
@@ -385,7 +392,8 @@
                 msg = `*طلب كانفا برو*%0A` +
                       `*الاسم:* ${document.getElementById('cvName').value}%0A` +
                       `*الإيميل:* ${document.getElementById('cvEmail').value}%0A` +
-                      `*المدة:* ${document.getElementById('cvPlan').value}`;
+                      `*المدة:* ${document.getElementById('cvPlan').value}%0A` +
+                      `*وسيلة الدفع:* ${document.getElementById('cvPay').value}`;
             } else if(type === 'تصميم') {
                 msg = `*طلب تصميم نيزك*%0A` +
                       `*الاسم:* ${document.getElementById('dsName').value}%0A` +
