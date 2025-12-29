@@ -357,15 +357,40 @@
             const waNumber = "967772740318";
             
             if(type === 'شحن') {
-                msg = `*طلب شحن USDT*%0A*الاسم:* ${document.getElementById('nameC').value}%0A*الكمية:* ${document.getElementById('amountC').value}%0A*الدفع:* ${document.getElementById('payC').value}%0A*العنوان:* ${document.getElementById('addrC').value}`;
+                msg = `*طلب شحن USDT*%0A` +
+                      `*الاسم:* ${document.getElementById('nameC').value}%0A` +
+                      `*الهاتف:* ${document.getElementById('phoneC').value}%0A` +
+                      `*الكمية:* ${document.getElementById('amountC').value}%0A` +
+                      `*وسيلة الدفع:* ${document.getElementById('payC').value}%0A` +
+                      `*رقم العملية:* ${document.getElementById('txnC').value}%0A` +
+                      `*نوع المحفظة:* ${document.getElementById('walletC').value}%0A` +
+                      `*الشبكة:* ${document.getElementById('netC').value}%0A` +
+                      `*العنوان:* ${document.getElementById('addrC').value}`;
             } else if(type === 'سحب') {
-                msg = `*طلب سحب USDT*%0A*الاسم:* ${document.getElementById('nameW').value}%0A*الكمية:* ${document.getElementById('amountW').value}%0A*الاستلام:* ${document.getElementById('receiveW').value}`;
+                msg = `*طلب سحب USDT*%0A` +
+                      `*الاسم:* ${document.getElementById('nameW').value}%0A` +
+                      `*الهاتف:* ${document.getElementById('phoneW').value}%0A` +
+                      `*الكمية:* ${document.getElementById('amountW').value}%0A` +
+                      `*الاستلام:* ${document.getElementById('receiveW').value}%0A` +
+                      `*رقم الحساب:* ${document.getElementById('accW').value}%0A` +
+                      `*نوع المحفظة:* ${document.getElementById('walletW').value}%0A` +
+                      `*الشبكة:* ${document.getElementById('netW').value}`;
             } else if(type === 'تيك توك') {
-                msg = `*طلب شحن تيك توك*%0A*ID:* ${document.getElementById('tkId').value}%0A*العملات:* ${document.getElementById('tkCoins').value}`;
+                msg = `*طلب شحن تيك توك*%0A` +
+                      `*الاسم:* ${document.getElementById('tkName').value}%0A` +
+                      `*ID:* ${document.getElementById('tkId').value}%0A` +
+                      `*العملات:* ${document.getElementById('tkCoins').value}%0A` +
+                      `*الدفع:* ${document.getElementById('tkPay').value}`;
             } else if(type === 'كانفا') {
-                msg = `*طلب كانفا برو*%0A*الإيميل:* ${document.getElementById('cvEmail').value}%0A*المدة:* ${document.getElementById('cvPlan').value}`;
+                msg = `*طلب كانفا برو*%0A` +
+                      `*الاسم:* ${document.getElementById('cvName').value}%0A` +
+                      `*الإيميل:* ${document.getElementById('cvEmail').value}%0A` +
+                      `*المدة:* ${document.getElementById('cvPlan').value}`;
             } else if(type === 'تصميم') {
-                msg = `*طلب تصميم نيزك*%0A*الاسم:* ${document.getElementById('dsName').value}%0A*الخدمة:* ${document.getElementById('dsType').value}%0A*التفاصيل:* ${document.getElementById('dsDesc').value}`;
+                msg = `*طلب تصميم نيزك*%0A` +
+                      `*الاسم:* ${document.getElementById('dsName').value}%0A` +
+                      `*الخدمة:* ${document.getElementById('dsType').value}%0A` +
+                      `*التفاصيل:* ${document.getElementById('dsDesc').value}`;
             }
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
