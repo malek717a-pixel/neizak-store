@@ -18,6 +18,7 @@
             --dark-blue: #1a202c;
             --body-text: #4a5568;
             --whatsapp-green: #25D366;
+            --windsor-red: #e31e24;
         }
 
         * { box-sizing: border-box; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
@@ -37,13 +38,41 @@
             background: #ffffff;
             border: 3px solid var(--main-cyan);
             border-radius: 25px;
-            padding: 40px 20px;
+            padding: 30px 20px;
             box-shadow: 0 20px 25px rgba(0,0,0,0.1);
             text-align: center;
         }
 
-        .logo { font-size: 3rem; font-weight: 900; color: var(--dark-blue); margin-bottom: 10px; }
-        .tagline { color: var(--body-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 40px; }
+        .logo { font-size: 3rem; font-weight: 900; color: var(--dark-blue); margin-bottom: 5px; }
+        .tagline { color: var(--body-text); font-size: 1.1rem; font-weight: 700; margin-bottom: 30px; }
+
+        .info-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        .info-card-small {
+            background: #f8fafc;
+            border: 1px solid var(--main-cyan);
+            border-radius: 15px;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            max-width: fit-content;
+        }
+        .info-card-small:hover { background: #e0f7ff; transform: scale(1.03); }
+        .info-card-small i {
+            font-size: 1.2rem;
+            color: var(--main-cyan);
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .info-card-small span { font-weight: 800; font-size: 0.95rem; color: var(--dark-blue); }
 
         .services-grid {
             display: grid;
@@ -59,7 +88,6 @@
             transition: 0.3s;
             cursor: pointer;
         }
-
         .card:hover { border-color: var(--main-cyan); transform: translateY(-5px); }
 
         .icon-box {
@@ -139,13 +167,39 @@
         .social-item { text-decoration: none; color: white; padding: 8px; border-radius: 10px; font-size: 0.85rem; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 5px; }
         
         .youtube { background: #FF0000; } .telegram { background: #0088cc; } .facebook { background: #1877F2; } .instagram { background: #E1306C; } .whatsapp { background: var(--whatsapp-green); grid-column: 1/-1; }
+        
+        .broker-box {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fffcf0;
+            border-radius: 15px;
+            border: 1px solid #ffeeba;
+        }
+        .broker-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background: var(--windsor-red);
+            color: white;
+            padding: 8px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
 
     <div class="site-container">
         <h1 class="logo">نــيــزك</h1>
-        <p class="tagline">نــيـــزك لخدمات الإنترنت والتسويق <br> نقدم حلول مثالية لأعمالك عبر الإنترنت</p>
+        <p class="tagline">نــيـــزك لخدمات الإنترنت والتسويق</p>
+
+        <div class="info-bar">
+            <div class="info-card-small" onclick="openModal('whatIsNezkModal')">
+                <i class="fa-solid fa-meteor"></i>
+                <span>ما هي شركة نيزك؟</span>
+            </div>
+        </div>
 
         <div class="services-grid">
             <div class="card" onclick="openModal('mainUsdtModal')">
@@ -170,15 +224,35 @@
         </button>
     </div>
 
+    <div id="whatIsNezkModal" class="modal">
+        <div class="modal-content">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <i class="fa-solid fa-meteor" style="font-size: 3rem; color: var(--main-cyan);"></i>
+            </div>
+            <h2 style="color: var(--dark-blue); margin-bottom: 20px; text-align: center;">حول شركة نيزك</h2>
+            <p style="font-size: 1rem; line-height: 1.7; color: var(--body-text); text-align: justify; padding: 0 10px;">
+                <strong>نيزك</strong> هي شركة وساطة يمنية متخصصة في تقديم الحلول المالية الرقمية. نحن نسهل على عملائنا في اليمن عمليات 
+                <strong>سحب وشحن رصيد USDT</strong> وتوفير الخدمات الإلكترونية التي يصعب الوصول إليها محلياً بطريقة آمنة وسريعة.
+            </p>
+            
+            <div class="broker-box">
+                <p style="font-weight: 800; color: #856404; font-size: 0.95rem;">💡 توصية نيزك للمتداولين:</p>
+                <p style="font-size: 0.9rem; color: #666;">للحصول على أفضل تجربة تداول، ننصحكم باستخدام <strong>وندسور بروكر</strong>.</p>
+                <a href="https://malek717a-pixel.github.io/windsor-yemen/" target="_blank" class="broker-btn">زيارة صفحة وندسور</a>
+            </div>
+            <button class="btn-close" onclick="closeModal('whatIsNezkModal')">إغلاق النافذة</button>
+        </div>
+    </div>
+
     <div id="mainUsdtModal" class="modal">
         <div class="modal-content">
             <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خيارات USDT</h2>
             <div class="sub-services">
-                <div class="sub-card" style="border-bottom: 5px solid var(--main-cyan);" onclick="closeModal('mainUsdtModal'); openModal('formChargeModal')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--main-cyan);" onclick="closeAndOpen('mainUsdtModal', 'formChargeModal')">
                     <i class="fa-solid fa-circle-arrow-up" style="color: var(--main-cyan);"></i>
                     <h3>شحن USDT</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid var(--withdraw-orange);" onclick="closeModal('mainUsdtModal'); openModal('formWithdrawModal')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--withdraw-orange);" onclick="closeAndOpen('mainUsdtModal', 'formWithdrawModal')">
                     <i class="fa-solid fa-circle-arrow-down" style="color: var(--withdraw-orange);"></i>
                     <h3>سحب USDT</h3>
                 </div>
@@ -205,7 +279,7 @@
             <div class="form-group"><label>الشبكة:</label><select id="netC"><option>TRC20</option><option>ERC20</option><option>BEP20</option><option>Polygon</option></select></div>
             <div class="form-group"><label>عنوان المحفظة:</label><textarea id="addrC" rows="2" placeholder="لصق العنوان هنا"></textarea></div>
             <button class="btn-whatsapp-submit" onclick="sendToWA('شحن')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
-            <button class="btn-close" onclick="closeModal('formChargeModal'); openModal('mainUsdtModal')">رجوع</button>
+            <button class="btn-close" onclick="closeAndOpen('formChargeModal', 'mainUsdtModal')">رجوع</button>
         </div>
     </div>
 
@@ -226,7 +300,7 @@
             <div class="form-group"><label>نوع المحفظة التي ستسحب منها:</label><select id="walletW"><option>Binance</option><option>OKX</option><option>MEXC</option><option>SafePal</option><option>Trust Wallet</option><option>أخرى</option></select></div>
             <div class="form-group"><label>الشبكة:</label><select id="netW"><option>TRC20</option><option>ERC20</option><option>BEP20</option><option>Polygon</option></select></div>
             <button class="btn-whatsapp-submit" style="background: var(--withdraw-orange);" onclick="sendToWA('سحب')"><i class="fab fa-whatsapp"></i> طلب سحب عبر الواتساب</button>
-            <button class="btn-close" onclick="closeModal('formWithdrawModal'); openModal('mainUsdtModal')">رجوع</button>
+            <button class="btn-close" onclick="closeAndOpen('formWithdrawModal', 'mainUsdtModal')">رجوع</button>
         </div>
     </div>
 
@@ -234,11 +308,11 @@
         <div class="modal-content">
             <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خدمات التطبيقات</h2>
             <div class="sub-services">
-                <div class="sub-card" style="border-bottom: 5px solid var(--tiktok-pink);" onclick="closeModal('mainAppsModal'); openModal('formTiktokModal')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--tiktok-pink);" onclick="closeAndOpen('mainAppsModal', 'formTiktokModal')">
                     <i class="fa-brands fa-tiktok" style="color: var(--tiktok-pink);"></i>
                     <h3>شحن تيك توك</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid var(--canva-purple);" onclick="closeModal('mainAppsModal'); openModal('formCanvaModal')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--canva-purple);" onclick="closeAndOpen('mainAppsModal', 'formCanvaModal')">
                     <i class="fa-solid fa-palette" style="color: var(--canva-purple);"></i>
                     <h3>كانفا برو</h3>
                 </div>
@@ -261,7 +335,7 @@
                 </select>
             </div>
             <button class="btn-whatsapp-submit" style="background: var(--tiktok-pink);" onclick="sendToWA('تيك توك')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
-            <button class="btn-close" onclick="closeModal('formTiktokModal'); openModal('mainAppsModal')">رجوع</button>
+            <button class="btn-close" onclick="closeAndOpen('formTiktokModal', 'mainAppsModal')">رجوع</button>
         </div>
     </div>
 
@@ -285,7 +359,7 @@
                 </select>
             </div>
             <button class="btn-whatsapp-submit" style="background: var(--canva-purple);" onclick="sendToWA('كانفا')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
-            <button class="btn-close" onclick="closeModal('formCanvaModal'); openModal('mainAppsModal')">رجوع</button>
+            <button class="btn-close" onclick="closeAndOpen('formCanvaModal', 'mainAppsModal')">رجوع</button>
         </div>
     </div>
 
@@ -293,27 +367,27 @@
         <div class="modal-content">
             <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خدمات التصميم الاحترافي</h2>
             <div class="sub-services">
-                <div class="sub-card" style="border-bottom: 5px solid var(--friday-gold);" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم جمعة مباركة')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--friday-gold);" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'تصميم جمعة مباركة')">
                     <i class="fa-solid fa-mosque" style="color: var(--friday-gold);"></i>
                     <h3>تصاميم الجمعة</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid #10b981;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم شعار / لوجو')">
+                <div class="sub-card" style="border-bottom: 5px solid #10b981;" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'تصميم شعار / لوجو')">
                     <i class="fa-solid fa-stamp" style="color: #10b981;"></i>
                     <h3>شعارات (Logos)</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid #ef4444;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم بوستر إعلاني')">
+                <div class="sub-card" style="border-bottom: 5px solid #ef4444;" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'تصميم بوستر إعلاني')">
                     <i class="fa-solid fa-image" style="color: #ef4444;"></i>
                     <h3>بوسترات إعلانية</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid var(--design-blue);" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم هوية بصرية')">
+                <div class="sub-card" style="border-bottom: 5px solid var(--design-blue);" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'تصميم هوية بصرية')">
                     <i class="fa-solid fa-briefcase" style="color: var(--design-blue);"></i>
                     <h3>هوية بصرية</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid #8b5cf6;" onclick="closeModal('mainDesignModal'); openDesignForm('تصميم بطاقة عمل / بزنس كارد')">
+                <div class="sub-card" style="border-bottom: 5px solid #8b5cf6;" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'تصميم بطاقة عمل / بزنس كارد')">
                     <i class="fa-solid fa-address-card" style="color: #8b5cf6;"></i>
                     <h3>بزنس كارد</h3>
                 </div>
-                <div class="sub-card" style="border-bottom: 5px solid #f59e0b;" onclick="closeModal('mainDesignModal'); openDesignForm('طلب تصميم خاص')">
+                <div class="sub-card" style="border-bottom: 5px solid #f59e0b;" onclick="closeAndOpen('mainDesignModal', 'formDesignModal', 'طلب تصميم خاص')">
                     <i class="fa-solid fa-plus-circle" style="color: #f59e0b;"></i>
                     <h3>طلبات أخرى</h3>
                 </div>
@@ -327,9 +401,16 @@
             <h2 id="designFormTitle" style="color: var(--design-blue); margin-bottom: 20px; text-align: center;">طلب تصميم</h2>
             <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="dsName" placeholder="أدخل اسمك"></div>
             <div class="form-group"><label>نوع الخدمة:</label><input type="text" id="dsType" readonly style="background: #f1f5f9;"></div>
+            <div class="form-group">
+                <label>وسيلة الدفع المتوفرة لديك:</label>
+                <select id="dsPay">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
+            </div>
             <div class="form-group"><label>ملاحظات (ألوان، نصوص، تفاصيل):</label><textarea id="dsDesc" rows="3" placeholder="اكتب ما تريده في التصميم..."></textarea></div>
             <button class="btn-whatsapp-submit" style="background: var(--design-blue);" onclick="sendToWA('تصميم')"><i class="fab fa-whatsapp"></i> إرسال الطلب عبر الواتساب</button>
-            <button class="btn-close" onclick="closeModal('formDesignModal'); openModal('mainDesignModal')">رجوع</button>
+            <button class="btn-close" onclick="closeAndOpen('formDesignModal', 'mainDesignModal')">رجوع</button>
         </div>
     </div>
 
@@ -350,13 +431,33 @@
     </div>
 
     <script>
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        
-        function openDesignForm(type) {
-            document.getElementById('dsType').value = type;
-            document.getElementById('designFormTitle').innerText = "طلب " + type;
-            openModal('formDesignModal');
+        function openModal(id) {
+            document.getElementById(id).style.display = 'flex';
+            history.pushState({ modalId: id }, null, "");
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            if (history.state && history.state.modalId === id) { history.back(); }
+        }
+
+        function closeAndOpen(toClose, toOpen, designType = null) {
+            document.getElementById(toClose).style.display = 'none';
+            if (history.state) history.replaceState(null, null, "");
+            if (designType) {
+                document.getElementById('dsType').value = designType;
+                document.getElementById('designFormTitle').innerText = "طلب " + designType;
+            }
+            openModal(toOpen);
+        }
+
+        window.onpopstate = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(m => m.style.display = 'none');
+        };
+
+        window.onclick = function(e) {
+            if (e.target.classList.contains('modal')) { closeModal(e.target.id); }
         }
 
         function sendToWA(type) {
@@ -398,12 +499,11 @@
                 msg = `*طلب تصميم نيزك*%0A` +
                       `*الاسم:* ${document.getElementById('dsName').value}%0A` +
                       `*الخدمة:* ${document.getElementById('dsType').value}%0A` +
+                      `*وسيلة الدفع:* ${document.getElementById('dsPay').value}%0A` +
                       `*التفاصيل:* ${document.getElementById('dsDesc').value}`;
             }
             window.open(`https://wa.me/${waNumber}?text=${msg}`, '_blank');
         }
-
-        window.onclick = function(e) { if(e.target.className === 'modal') e.target.style.display = 'none'; }
     </script>
 </body>
 </html>
