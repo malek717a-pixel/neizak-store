@@ -19,6 +19,7 @@
             --body-text: #4a5568;
             --whatsapp-green: #25D366;
             --windsor-red: #e31e24;
+            --games-green: #10b981; /* لون جديد للألعاب */
         }
 
         * { box-sizing: border-box; font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
@@ -207,6 +208,11 @@
                 <h3>شحن وسحب USDT</h3>
                 <p>خيارات الشحن والسحب الرقمي</p>
             </div>
+            <div class="card" onclick="openModal('mainGamesModal')">
+                <div class="icon-box" style="background: var(--games-green);"><i class="fa-solid fa-gamepad"></i></div>
+                <h3>شحن ألعاب</h3>
+                <p>شدات ببجي وفئات متنوعة</p>
+            </div>
             <div class="card" onclick="openModal('mainAppsModal')">
                 <div class="icon-box"><i class="fa-solid fa-mobile-screen"></i></div>
                 <h3>تطبيقات</h3>
@@ -224,6 +230,50 @@
         </button>
     </div>
 
+    <div id="mainGamesModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--dark-blue); margin-bottom: 25px;">خدمات شحن الألعاب</h2>
+            <div class="sub-services">
+                <div class="sub-card" style="border-bottom: 5px solid #eab308;" onclick="closeAndOpen('mainGamesModal', 'formPubgModal')">
+                    <i class="fa-solid fa-gun" style="color: #eab308;"></i>
+                    <h3>شدات ببجي</h3>
+                </div>
+                <div class="sub-card" style="opacity: 0.5;">
+                    <i class="fa-solid fa-ellipsis" style="color: #ccc;"></i>
+                    <h3>قريباً</h3>
+                </div>
+            </div>
+            <button class="btn-close" onclick="closeModal('mainGamesModal')">إغلاق</button>
+        </div>
+    </div>
+
+    <div id="formPubgModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: #eab308; margin-bottom: 20px; text-align: center;">شحن شدات ببجي UC</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="pbName" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>الآيدي (ID):</label><input type="number" id="pbId" placeholder="رقم الآيدي في اللعبة"></div>
+            <div class="form-group">
+                <label>الفئة المطلوبة:</label>
+                <select id="pbAmount">
+                    <option>60 شده</option><option>325 شده</option><option>385 شده</option><option>660</option>
+                    <option>720</option><option>1800</option><option>3850</option><option>4175</option>
+                    <option>8100</option><option>8400</option><option>11950</option><option>16200</option>
+                    <option>24300</option><option>32400</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>الحساب البنكي / وسيلة الدفع:</label>
+                <select id="pbPay">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
+            </div>
+            <div class="form-group"><label>رقم العملية / الحوالة:</label><input type="text" id="pbTxn" placeholder="رقم التحويل"></div>
+            <button class="btn-whatsapp-submit" style="background: #eab308; color: black;" onclick="sendToWA('ببجي')"><i class="fab fa-whatsapp"></i> طلب الشحن عبر الواتساب</button>
+            <button class="btn-close" onclick="closeAndOpen('formPubgModal', 'mainGamesModal')">رجوع</button>
+        </div>
+    </div>
+
     <div id="whatIsNezkModal" class="modal">
         <div class="modal-content">
             <div style="text-align: center; margin-bottom: 15px;">
@@ -234,7 +284,6 @@
                 <strong>نيزك</strong> هي شركة وساطة يمنية متخصصة في تقديم الحلول المالية الرقمية. نحن نسهل على عملائنا في اليمن عمليات 
                 <strong>سحب وشحن رصيد USDT</strong> وتوفير الخدمات الإلكترونية التي يصعب الوصول إليها محلياً بطريقة آمنة وسريعة.
             </p>
-            
             <div class="broker-box">
                 <p style="font-weight: 800; color: #856404; font-size: 0.95rem;">💡 توصية نيزك للمتداولين:</p>
                 <p style="font-size: 0.9rem; color: #666;">للحصول على أفضل تجربة تداول، ننصحكم باستخدام <strong>وندسور بروكر</strong>.</p>
@@ -464,7 +513,14 @@
             let msg = "";
             const waNumber = "967772740318";
             
-            if(type === 'شحن') {
+            if(type === 'ببجي') {
+                msg = `*طلب شحن شدات ببجي*%0A` +
+                      `*الاسم:* ${document.getElementById('pbName').value}%0A` +
+                      `*الآيدي ID:* ${document.getElementById('pbId').value}%0A` +
+                      `*الكمية:* ${document.getElementById('pbAmount').value}%0A` +
+                      `*وسيلة الدفع:* ${document.getElementById('pbPay').value}%0A` +
+                      `*رقم العملية:* ${document.getElementById('pbTxn').value}`;
+            } else if(type === 'شحن') {
                 msg = `*طلب شحن USDT*%0A` +
                       `*الاسم:* ${document.getElementById('nameC').value}%0A` +
                       `*الهاتف:* ${document.getElementById('phoneC').value}%0A` +
