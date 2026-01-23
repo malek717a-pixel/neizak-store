@@ -13,6 +13,7 @@
             --withdraw-orange: #ff9100;
             --tiktok-pink: #fe2c55;
             --canva-purple: #7d2ae8;
+            --bigo-blue: #24d4f2; /* لون خاص ببيجو لايف */
             --design-blue: #3b82f6;
             --friday-gold: #b59410;
             --dark-blue: #1a202c;
@@ -361,6 +362,10 @@
                     <i class="fa-brands fa-tiktok" style="color: var(--tiktok-pink);"></i>
                     <h3>شحن تيك توك</h3>
                 </div>
+                <div class="sub-card" style="border-bottom: 5px solid var(--bigo-blue);" onclick="closeAndOpen('mainAppsModal', 'formBigoModal')">
+                    <i class="fa-solid fa-video" style="color: var(--bigo-blue);"></i>
+                    <h3>شحن بيجو لايف</h3>
+                </div>
                 <div class="sub-card" style="border-bottom: 5px solid var(--canva-purple);" onclick="closeAndOpen('mainAppsModal', 'formCanvaModal')">
                     <i class="fa-solid fa-palette" style="color: var(--canva-purple);"></i>
                     <h3>كانفا برو</h3>
@@ -385,6 +390,24 @@
             </div>
             <button class="btn-whatsapp-submit" style="background: var(--tiktok-pink);" onclick="sendToWA('تيك توك')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
             <button class="btn-close" onclick="closeAndOpen('formTiktokModal', 'mainAppsModal')">رجوع</button>
+        </div>
+    </div>
+
+    <div id="formBigoModal" class="modal">
+        <div class="modal-content" style="text-align: right;">
+            <h2 style="color: var(--bigo-blue); margin-bottom: 20px; text-align: center;">شحن جواهر Bigo Live</h2>
+            <div class="form-group"><label>الاسم الكامل:</label><input type="text" id="bgName" placeholder="أدخل اسمك"></div>
+            <div class="form-group"><label>آيدي الحساب (Bigo ID):</label><input type="text" id="bgId" placeholder="رقم الآيدي في بيجو"></div>
+            <div class="form-group"><label>كمية الجواهر:</label><input type="number" id="bgDiamonds" placeholder="مثلاً: 500 جوهرة"></div>
+            <div class="form-group">
+                <label>وسيلة الدفع:</label>
+                <select id="bgPay">
+                    <option>كريمي دولار</option><option>كريمي يمني</option><option>كريمي سعودي</option>
+                    <option>محفظة جيب</option><option>محفظة جوالي</option><option>محفظة ون كاش</option>
+                </select>
+            </div>
+            <button class="btn-whatsapp-submit" style="background: var(--bigo-blue); color: #000;" onclick="sendToWA('بيجو')"><i class="fab fa-whatsapp"></i> طلب عبر الواتساب</button>
+            <button class="btn-close" onclick="closeAndOpen('formBigoModal', 'mainAppsModal')">رجوع</button>
         </div>
     </div>
 
@@ -545,7 +568,16 @@
                       `*ID:* ${document.getElementById('tkId').value}%0A` +
                       `*العملات:* ${document.getElementById('tkCoins').value}%0A` +
                       `*الدفع:* ${document.getElementById('tkPay').value}`;
-            } else if(type === 'كانفا') {
+            } 
+            // إضافة معالجة رسالة بيجو لايف
+            else if(type === 'بيجو') {
+                msg = `*طلب شحن بيجو لايف*%0A` +
+                      `*الاسم:* ${document.getElementById('bgName').value}%0A` +
+                      `*Bigo ID:* ${document.getElementById('bgId').value}%0A` +
+                      `*الجواهر:* ${document.getElementById('bgDiamonds').value}%0A` +
+                      `*وسيلة الدفع:* ${document.getElementById('bgPay').value}`;
+            }
+            else if(type === 'كانفا') {
                 msg = `*طلب كانفا برو*%0A` +
                       `*الاسم:* ${document.getElementById('cvName').value}%0A` +
                       `*الإيميل:* ${document.getElementById('cvEmail').value}%0A` +
